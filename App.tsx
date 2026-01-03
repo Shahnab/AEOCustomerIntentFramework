@@ -72,40 +72,42 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen w-full bg-background text-gray-300 font-sans selection:bg-white/30 flex flex-col">
       {/* Top Navigation Bar */}
-      <div className="h-24 border-b border-white/10 bg-black/95 backdrop-blur-2xl px-8 flex items-center justify-between sticky top-0 z-50 relative shadow-2xl">
-         <div className="w-10"></div> {/* Spacer */}
+      <div className="min-h-[80px] md:h-24 border-b border-white/10 bg-black/95 backdrop-blur-2xl px-4 md:px-8 flex flex-col md:flex-row items-center justify-between sticky top-0 z-50 shadow-2xl py-2 md:py-0 gap-2 md:gap-0">
+         <div className="w-10 hidden md:block"></div> {/* Spacer for desktop centering */}
          
          {/* Centered Title */}
-         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full max-w-5xl px-4 pointer-events-none flex flex-col items-center justify-center">
-            <h1 className="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 tracking-[0.2em] uppercase drop-shadow-sm mb-2 whitespace-nowrap">
+         <div className="md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 text-center w-full max-w-5xl px-4 pointer-events-none flex flex-col items-center justify-center order-2 md:order-none">
+            <h1 className="text-sm sm:text-lg md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 tracking-[0.15em] md:tracking-[0.2em] uppercase drop-shadow-sm mb-1 md:mb-2 whitespace-normal md:whitespace-nowrap leading-tight">
                 AEO: Customer Intent Framework
             </h1>
-            <div className="flex items-center gap-3">
-                 <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#ff7a00]/50"></div>
-                 <p className="text-[11px] md:text-xs text-gray-400 font-medium tracking-widest uppercase flex items-center gap-2">
-                    From keywords <span className="text-[#ff7a00]">•</span> Topic cluster analysis <span className="text-[#ff7a00]">•</span> Customer Intent Prompts
+            <div className="flex items-center gap-2 md:gap-3">
+                 <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#ff7a00]/50"></div>
+                 <p className="text-[8px] md:text-xs text-gray-400 font-medium tracking-widest uppercase flex items-center gap-1 md:gap-2 whitespace-nowrap">
+                    Keywords <span className="text-[#ff7a00]">•</span> Clusters <span className="text-[#ff7a00]">•</span> Intent Prompts
                 </p>
-                <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#ff7a00]/50"></div>
+                <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#ff7a00]/50"></div>
             </div>
          </div>
 
-         <div className="flex items-center gap-4 z-10">
-             <span className="text-[10px] font-mono text-gray-400 flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5">
+         <div className="flex items-center gap-4 z-10 order-1 md:order-none w-full md:w-auto justify-end md:justify-start">
+             <span className="text-[9px] md:text-[10px] font-mono text-gray-400 flex items-center gap-2 px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-white/10 bg-white/5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff7a00] shadow-[0_0_8px_rgba(255,122,0,0.8)] animate-pulse"></span>
                 SYSTEM ONLINE
              </span>
          </div>
       </div>
 
-      <div className="flex-1 w-full px-6 py-6 space-y-6">
+      <div className="flex-1 w-full px-3 md:px-6 py-4 md:py-6 space-y-4 md:space-y-6">
         
         {/* Configuration Toolbar */}
         <div className="bg-surface/50 border border-white/20 rounded-lg p-1.5 flex flex-col md:flex-row items-center gap-2 shadow-sm backdrop-blur-sm relative z-40">
-             <div className="flex-1 w-full flex items-center gap-2 px-3">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Config</label>
-                <div className="h-4 w-px bg-white/10 mx-2"></div>
+             <div className="flex-1 w-full flex flex-col sm:flex-row items-start sm:items-center gap-2 px-2 md:px-3 py-2 md:py-0">
+                <div className="hidden sm:flex items-center">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Config</label>
+                    <div className="h-4 w-px bg-white/10 mx-2"></div>
+                </div>
                 
-                <div className="flex-1 grid grid-cols-2 gap-4">
+                <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-4">
                     {/* Category Select */}
                     <CustomSelect 
                         value={category}
@@ -114,7 +116,7 @@ const App: React.FC = () => {
                     />
 
                     {/* Country Select */}
-                    <div className="border-l border-white/10 pl-4">
+                    <div className="sm:border-l border-white/10 sm:pl-4">
                         <CustomSelect 
                             value={country}
                             onChange={setCountry}
@@ -127,7 +129,7 @@ const App: React.FC = () => {
              <button 
                 onClick={handleSubmit}
                 disabled={isLoading}
-                className="w-full md:w-auto md:min-w-[160px] h-9 px-6 bg-white/5 hover:bg-[#ff7a00]/10 border border-white/10 hover:border-[#ff7a00]/30 disabled:opacity-50 disabled:cursor-not-allowed text-[#ff7a00] text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md group"
+                className="w-full md:w-auto md:min-w-[160px] h-10 md:h-9 px-6 bg-white/5 hover:bg-[#ff7a00]/10 border border-white/10 hover:border-[#ff7a00]/30 disabled:opacity-50 disabled:cursor-not-allowed text-[#ff7a00] text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md group"
             >
                 {isLoading ? (
                     <span className="animate-spin h-3 w-3 border-2 border-white/30 border-t-[#ff7a00] rounded-full"></span>
@@ -144,7 +146,7 @@ const App: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[700px] h-auto">
             
             {/* Sidebar: Keywords */}
-            <div className="lg:col-span-3 h-full flex flex-col min-h-[400px] lg:min-h-0">
+            <div className="lg:col-span-3 h-[300px] lg:h-full flex flex-col lg:min-h-0">
                 <GlassCard 
                     title="Keyword Extraction" 
                     className="h-full bg-surface/30 backdrop-blur-sm"
@@ -167,7 +169,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Main View: Visualization */}
-            <div className="lg:col-span-9 h-full flex flex-col min-h-[500px] lg:min-h-0">
+            <div className="lg:col-span-9 h-[400px] lg:h-full flex flex-col lg:min-h-0">
                 <GlassCard 
                     title="Cluster Analysis" 
                     className="h-full bg-surface/30 backdrop-blur-sm"

@@ -46,6 +46,7 @@ const ClusterChart: React.FC<ClusterChartProps> = ({ data }) => {
     };
 
     let { width, height } = getDimensions();
+    const isMobile = width < 768;
     
     // Clear previous
     const svg = d3.select(svgRef.current);
@@ -69,8 +70,8 @@ const ClusterChart: React.FC<ClusterChartProps> = ({ data }) => {
     svg.call(zoom).on("dblclick.zoom", null);
     zoomRef.current = zoom;
 
-    // Apply initial zoom out to see all clusters (0.55 scale)
-    const initialScale = 0.55;
+    // Apply initial zoom out to see all clusters
+    const initialScale = isMobile ? 0.35 : 0.55;
     const initialTx = (width - width * initialScale) / 2;
     const initialTy = (height - height * initialScale) / 2;
     svg.call(zoom.transform, d3.zoomIdentity.translate(initialTx, initialTy).scale(initialScale));
@@ -87,7 +88,7 @@ const ClusterChart: React.FC<ClusterChartProps> = ({ data }) => {
         name: topic.topic,
         type: 'topic',
         group: topic.topic,
-        r: 65, // Large radius for Topic
+        r: isMobile ? 45 : 65, // Responsive radius
         x: width / 2 + (Math.random() - 0.5) * 50,
         y: height / 2 + (Math.random() - 0.5) * 50,
       });
