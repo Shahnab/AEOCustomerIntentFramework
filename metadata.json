@@ -1,0 +1,5 @@
+{
+  "name": "AEO: Customer Intent Framework",
+  "description": "A simulation UI for generating category topics and customer intent using AEO concepts with glassmorphic design.",
+  "requestFramePermissions": []
+}
